@@ -1,0 +1,4 @@
+#ifndef FACERECOGNIZER_H
+#define FACERECOGNIZER_H
+
+#endif // FACERECOGNIZER_H
