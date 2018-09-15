@@ -8,7 +8,6 @@ Recognizer::Recognizer(string detector_model, string shape_predictor_model, stri
     deserialize(recognition_model) >> net;
     std::cout << "Load trained models sucessfully" << std::endl;
 }
-
 void Recognizer::setImage(Mat &image)
 {
     this->image = image;

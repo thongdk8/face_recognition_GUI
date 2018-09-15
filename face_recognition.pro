@@ -24,12 +24,20 @@ LIBS += -L/usr/local/lib -ldlib
 LIBS += -L/usr/lib -lopenblas
 LIBS += -L/usr/local/cuda/lib64 -lcublas -lcusolver -lcurand
 
+#MongoDB
+INCLUDEPATH += /usr/local/include/mongocxx/v_noabi /usr/local/include/bsoncxx/v_noabi /usr/local/include/libbson-1.0 /usr/local/include/libmongoc-1.0
+LIBS += -L/usr/local/lib -lmongocxx -lbsoncxx -lmongoc-1.0
+
 SOURCES += main.cpp\
         mainwindow.cpp \
-    facerecognizer.cpp
+    facerecognizer.cpp \
+    dbconector.cpp \
+    facedatamodel.cpp
 
 HEADERS  += mainwindow.h \
     defineddnn.h \
-    facerecognizer.h
+    facerecognizer.h \
+    dbconector.h \
+    facedatamodel.h
 
 FORMS    += mainwindow.ui
