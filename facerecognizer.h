@@ -7,7 +7,9 @@
 #include <opencv2/imgproc.hpp>
 #include <opencv2/core.hpp>
 #include <string>
+#include <vector>
 
+#include "cnndetector.h"
 #include "defineddnn.h"
 
 using namespace dlib;
@@ -23,6 +25,8 @@ public:
     Mat getImage();
 
     std::vector<matrix<float,0,1>> computeFaceDescriptors(Mat &img);
+    std::vector<matrix<float,0,1>> computeFaceDescriptors(Mat &img, std::vector<cv::Point> &anchors);
+    std::vector<matrix<float,0,1>> computeFaceDescriptors( SSDFaceDetector& face_detector,Mat &img, std::vector<cv::Point> &anchors);
     void printFaceDescriptions(std::vector<matrix<float,0,1>> face_descriptors);
 
 private:

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1300</width>
-    <height>850</height>
+    <width>1000</width>
+    <height>650</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,7 +18,7 @@
     <property name="geometry">
      <rect>
       <x>360</x>
-      <y>760</y>
+      <y>560</y>
       <width>99</width>
       <height>27</height>
      </rect>
@@ -31,13 +31,13 @@
     <property name="geometry">
      <rect>
       <x>480</x>
-      <y>760</y>
-      <width>99</width>
+      <y>560</y>
+      <width>151</width>
       <height>27</height>
      </rect>
     </property>
     <property name="text">
-     <string>Start Check In</string>
+     <string>On/Off Recognizer</string>
     </property>
    </widget>
    <widget class="QLabel" name="imageScreen">
@@ -45,8 +45,8 @@
      <rect>
       <x>10</x>
       <y>10</y>
-      <width>1280</width>
-      <height>720</height>
+      <width>960</width>
+      <height>540</height>
      </rect>
     </property>
     <property name="autoFillBackground">
@@ -60,7 +60,7 @@
     <property name="geometry">
      <rect>
       <x>110</x>
-      <y>760</y>
+      <y>560</y>
       <width>111</width>
       <height>27</height>
      </rect>
@@ -73,20 +73,20 @@
     <property name="geometry">
      <rect>
       <x>240</x>
-      <y>760</y>
+      <y>560</y>
       <width>99</width>
       <height>27</height>
      </rect>
     </property>
     <property name="text">
-     <string>Close Camera</string>
+     <string>Stop Camera</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushCloseApp">
     <property name="geometry">
      <rect>
       <x>820</x>
-      <y>760</y>
+      <y>560</y>
       <width>99</width>
       <height>27</height>
      </rect>
@@ -101,7 +101,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1300</width>
+     <width>1000</width>
      <height>25</height>
     </rect>
    </property>

@@ -25,19 +25,29 @@ LIBS += -L/usr/lib -lopenblas
 LIBS += -L/usr/local/cuda/lib64 -lcublas -lcusolver -lcurand
 
 #MongoDB
-INCLUDEPATH += /usr/local/include/mongocxx/v_noabi /usr/local/include/bsoncxx/v_noabi /usr/local/include/libbson-1.0 /usr/local/include/libmongoc-1.0
-LIBS += -L/usr/local/lib -lmongocxx -lbsoncxx -lmongoc-1.0
+#INCLUDEPATH += /usr/local/include/mongocxx/v_noabi /usr/local/include/bsoncxx/v_noabi /usr/local/include/libbson-1.0 /usr/local/include/libmongoc-1.0
+#LIBS += -L/usr/local/lib -lmongocxx -lbsoncxx -lmongoc-1.0
 
-SOURCES += main.cpp\
+SOURCES += enrolface.cpp\
+      main.cpp\
         mainwindow.cpp \
     facerecognizer.cpp \
-    dbconector.cpp \
-    facedatamodel.cpp
+#    dbconector.cpp \
+#    facedatamodel.cpp
+ #   enrolface.cpp
 
 HEADERS  += mainwindow.h \
     defineddnn.h \
     facerecognizer.h \
-    dbconector.h \
-    facedatamodel.h
+#    dbconector.h \
+#    facedatamodel.h
+    datamanager.h \
+    hnswlib/bruteforce.h \
+    hnswlib/hnswalg.h \
+    hnswlib/hnswlib.h \
+    hnswlib/space_ip.h \
+    hnswlib/space_l2.h \
+    hnswlib/visited_list_pool.h \
+    cnndetector.h
 
 FORMS    += mainwindow.ui

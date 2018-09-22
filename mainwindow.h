@@ -3,6 +3,11 @@
 
 #include <QMainWindow>
 #include <opencv2/videoio.hpp>
+#include <opencv2/core.hpp>
+#include "facerecognizer.h"
+#include "datamanager.h"
+#include <map>
+
 namespace Ui {
 class MainWindow;
 }
@@ -17,6 +22,7 @@ public:
 
 public:
     void showFrame();
+    void initPara(std::string cfg_fn);
 
 private slots:
     void on_pushOpenCamera_clicked();
@@ -25,12 +31,33 @@ private slots:
 
     void on_pushCloseApp_clicked();
 
+    void on_pushRegistration_clicked();
+
+    void on_pushCheckIn_clicked();
+
+public:
+    cv::Mat frame;
+
 private:
     Ui::MainWindow *ui;
 
     cv::VideoCapture video;
     bool isOpenCamera;
     bool isInProcess;
+
+    bool isIPCam;
+    int camID;
+    bool isRecognizing;
+    std::string camURL;
+
+
+    std::string detector_model;
+    std::string shape_predictor_model;
+    std::string face_recognition_model;
+    std::string database_path;
+    std::string proto_ssd_file;
+    std::string ssd_model;
+    std::map<std::string, int> name_counter;
 };
 
 #endif // MAINWINDOW_H
