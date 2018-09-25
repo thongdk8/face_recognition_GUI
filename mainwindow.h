@@ -48,6 +48,7 @@ private:
     bool isIPCam;
     int camID;
     bool isRecognizing;
+    float margin_dlib;
     std::string camURL;
 
 

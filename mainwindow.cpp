@@ -39,6 +39,7 @@ void MainWindow::initPara (std::string cfg_fn)
     cfg_file >> shape_predictor_model;
     cfg_file >> face_recognition_model;
     cfg_file >> database_path;
+    cfg_file >> margin_dlib;
     cfg_file >> proto_ssd_file;
     cfg_file >> ssd_model;
     cfg_file.close ();
@@ -70,7 +71,7 @@ void MainWindow::showFrame()
                 if(isRecognizing)
                 {
                     std::vector<cv::Point> anchors;
-                    auto dess = face_recognizer.computeFaceDescriptors(image,anchors);
+                    auto dess = face_recognizer.computeFaceDescriptors(image,anchors, margin_dlib);
     //                auto dess = face_recognizer.computeFaceDescriptors(face_detector,image,anchors);
 
     //                face_recognizer.printFaceDescriptions(dess);

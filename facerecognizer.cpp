@@ -63,7 +63,7 @@ std::vector<matrix<float,0,1>> Recognizer::computeFaceDescriptors(Mat &img)
     return face_descriptors;
 }
 
-std::vector<matrix<float,0,1>> Recognizer::computeFaceDescriptors(Mat &img, std::vector<cv::Point> &anchors)
+std::vector<matrix<float,0,1>> Recognizer::computeFaceDescriptors(Mat &img, std::vector<cv::Point> &anchors, float margin_dlib)
 {
     setImage(img);
     std::vector<matrix<float,0,1>> face_descriptors;
@@ -78,7 +78,7 @@ std::vector<matrix<float,0,1>> Recognizer::computeFaceDescriptors(Mat &img, std:
     {
         auto shape = sp(imgdlib, face.rect);
         matrix<rgb_pixel> face_chip;
-        extract_image_chip(imgdlib, get_face_chip_details(shape, 150, 0.35),
+        extract_image_chip(imgdlib, get_face_chip_details(shape, 150, margin_dlib),
                            face_chip);
         faces.push_back(face_chip);
 //                cv::Mat face_chip_cv = dlib::toMat(face_chip);
