@@ -127,11 +127,11 @@ public:
 
             auto ans = answers.top ();
             answers.pop();
-//            std::cout << "distance: " << ans.first << std::endl;
+            std::cout << "distance: " << ans.first << std::endl;
             if(ans.first <= threshold2){
                 count_true ++;
                 label_counter[ans.second]++;
-//                std::cout << "label_counter[" << ans.second << "] = " << label_counter[ans.second] << std::endl;
+                std::cout << "label_counter[" << ans.second << "] = " << label_counter[ans.second] << std::endl;
             }
         }
 
@@ -150,7 +150,7 @@ public:
         }
         std::cout << "label_counter[" << max_label_idx << "] = " << label_counter[max_label_idx] << std::endl;
         if(count_true > 0){
-            if(label_counter[max_label_idx]/count_true >= majority_threshold)
+            if(   ((float)label_counter[max_label_idx])/count_true >= majority_threshold)
                 isExisted = true;
         }
 

@@ -68,15 +68,15 @@ void MainWindow::showFrame()
         if(video.isOpened() && isOpenCamera)
         {
             video.read(image);
-            video1.write (image);
+
             if(!image.empty ()){
                 cv::resize(image, image, cv::Size(960,540));
-
+                video1.write (image);
                 if(isRecognizing)
                 {
                     std::vector<cv::Point> anchors;
                     auto dess = face_recognizer.computeFaceDescriptors(image,anchors, margin_dlib);
-    //                auto dess = face_recognizer.computeFaceDescriptors(face_detector,image,anchors);
+//                    auto dess = face_recognizer.computeFaceDescriptors(face_detector,image,anchors, margin_dlib);
 
     //                face_recognizer.printFaceDescriptions(dess);
                     auto res_names = dm.getInstanceName (dess);
