@@ -60,11 +60,15 @@ void MainWindow::showFrame()
     dm.loadData (database_path + "data.txt", database_path + "name_data.txt");
     dm.initSearchEngine ();
 
+    VideoWriter video1("outcpp.avi",CV_FOURCC('M','J','P','G'),5, Size(960,540));
+    VideoWriter video2("outcpp1.avi",CV_FOURCC('M','J','P','G'),5, Size(960,540));
+
     while(isInProcess)
     {
         if(video.isOpened() && isOpenCamera)
         {
             video.read(image);
+            video1.write (image);
             if(!image.empty ()){
                 cv::resize(image, image, cv::Size(960,540));
 
@@ -87,7 +91,7 @@ void MainWindow::showFrame()
                         }
                     }
                 }
-
+                video2.write (image);
                 cv::cvtColor(image, image, cv::COLOR_BGR2RGB);
                 ui->imageScreen->setPixmap(QPixmap::fromImage(QImage(image.data, image.cols,
                                                                      image.rows, image.step,
@@ -99,6 +103,8 @@ void MainWindow::showFrame()
         if(!isInProcess) break;
     }
     video.release();
+    video1.release ();
+    video2.release ();
 }
 
 void MainWindow::on_pushOpenCamera_clicked()
