@@ -46,7 +46,7 @@ template <typename SUBNET> using rcon5 = relu<affine<con5<45, SUBNET>>>;
 
 using net_type = loss_mmod<
     con<1, 9, 9, 1, 1, rcon5<rcon5<rcon5<downsampler<
-    input_rgb_image_pyramid<pyramid_down<6>>>>>>>>;
+    input_rgb_image_pyramid<pyramid_down<8>>>>>>>>;
 
 // ----------------------------------------------------------------------------------------
 

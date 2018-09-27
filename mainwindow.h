@@ -7,6 +7,7 @@
 #include "facerecognizer.h"
 #include "datamanager.h"
 #include <map>
+#include <mutex>
 
 namespace Ui {
 class MainWindow;
@@ -22,6 +23,7 @@ public:
 
 public:
     void showFrame();
+    void showFrame(std::mutex& fr_mutex, cv::Mat& frameThread, cv::VideoCapture& cap);
     void initPara(std::string cfg_fn);
 
 private slots:
@@ -45,13 +47,6 @@ private:
     bool isOpenCamera;
     bool isInProcess;
 
-    bool isIPCam;
-    int camID;
-    bool isRecognizing;
-    float margin_dlib;
-    std::string camURL;
-
-
     std::string detector_model;
     std::string shape_predictor_model;
     std::string face_recognition_model;
@@ -59,6 +54,13 @@ private:
     std::string proto_ssd_file;
     std::string ssd_model;
     std::map<std::string, int> name_counter;
+
+public:
+    bool isIPCam;
+    int camID;
+    bool isRecognizing;
+    float margin_dlib;
+    std::string camURL;
 };
 
 #endif // MAINWINDOW_H
