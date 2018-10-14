@@ -40,7 +40,7 @@ void MainWindow::initPara(std::string cfg_fn) {
     cfg_file >> ssd_model;
     cfg_file.close();
 
-    isRecognizing = false;
+    isRecognizing = true;
     isOpenCamera = true;
 }
 
@@ -74,13 +74,13 @@ void MainWindow::showFrame() {
                 if (isRecognizing) {
                     std::vector<cv::Point> anchors;
                     auto dess = face_recognizer.computeFaceDescriptors(
-                        image, anchors, margin_dlib);
+                        image, anchors, margin_dlib,5);
                     //                    auto dess =
                     //                    face_recognizer.computeFaceDescriptors(face_detector,image,anchors,
                     //                    margin_dlib);
 
                     //                face_recognizer.printFaceDescriptions(dess);
-                    auto res_names = dm.getInstanceName(dess);
+                    auto res_names = dm.getInstanceName(dess, 5);
                     image = face_recognizer.getImage();
 
                     if (res_names.size() > 0) {
@@ -184,10 +184,10 @@ void MainWindow::showFrame(std::mutex &fr_mutex, cv::Mat &frameThread,
 void MainWindow::on_pushOpenCamera_clicked() {
     std::cout << "on open camera push bottom" << std::endl;
 
-//    if (isIPCam)
-//        video.open(camURL);
-//    else
-//        video.open(camID);
+    if (isIPCam)
+        video.open(camURL);
+    else
+        video.open(camID);
 
     isOpenCamera = true;
 }

@@ -158,7 +158,7 @@ public:
         if(isExisted)
             return names[max_label_idx];
         else
-            return "Unknow";
+            return " ";
     }
 
     std::vector<std::string> getInstanceName (std::vector<dlib::matrix<float,0,1> > face_descriptors)
@@ -175,6 +175,93 @@ public:
 
                   auto name_rt = getInstanceName (des_array);
                   instanceNames.push_back (name_rt);
+            }
+        }
+
+        return instanceNames;
+    }
+
+
+
+    std::pair<std::string, int> getInstanceNameWithPrior(float* instance){
+        bool isExisted = false;
+
+        std::priority_queue<std::pair<float, labeltype >> answers;
+        float threshold2 = threshold*threshold;
+        int count_true = 0;
+        std::map<size_t, int> label_counter;
+        answers = appr_alg->searchKnn(instance,knn);
+        while(!answers.empty ()){
+            auto ans = answers.top ();
+            answers.pop();
+//            std::cout << "distance: " << ans.first << std::endl;
+            if(ans.first <= threshold2){
+                count_true ++;
+                label_counter[ans.second]++;
+//                std::cout << "label_counter[" << ans.second << "] = " << label_counter[ans.second] << std::endl;
+            }
+        }
+
+        std::cout << "Count true: " << count_true << std::endl;
+
+        int max_label = -1;
+        size_t max_label_idx = -1;
+        if(count_true >= knn_threshold){
+            for (auto lbc : label_counter){
+                if(lbc.second > max_label){
+                    max_label_idx = lbc.first;
+                    max_label = lbc.second;
+                }
+
+            }
+        }
+        std::cout << "label_counter[" << max_label_idx << "] = " << label_counter[max_label_idx] << std::endl;
+        if(count_true > 0){
+            if(   ((float)label_counter[max_label_idx])/count_true >= majority_threshold)
+                isExisted = true;
+        }
+
+
+        if(isExisted)
+            return  std::make_pair(names[max_label_idx], label_counter[max_label_idx]) ;
+        else
+            return std::make_pair("Unknow", 0);
+    }
+
+    std::vector<std::string> getInstanceName (std::vector<dlib::matrix<float,0,1> >& face_descriptors, int nb_crops)
+    {
+        std::vector<std::string> instanceNames;
+        float des_array[128];
+        if(face_descriptors.size ()>0){
+
+            int cnt_des = 0;
+            std::vector<std::pair<std::string, int>> namesTemps;
+            for(auto des : face_descriptors)
+            {
+                  for (long c = 0; c < 128; ++c)
+                  {
+                      des_array[c] = des(0,c);
+                  }
+
+                  auto name_rt = getInstanceNameWithPrior(des_array);
+                  namesTemps.push_back (name_rt);
+                  cnt_des += 1;
+                  if(cnt_des == nb_crops){
+                      int most_true = namesTemps[0].second;
+                      std::string most_name = namesTemps[0].first;
+                      for(auto n_pair: namesTemps){
+                          if(n_pair.second > most_true){
+                              most_true = n_pair.second;
+                              most_name = n_pair.first;
+                          }
+                      }
+                      instanceNames.push_back (most_name);
+
+                      cnt_des = 0;
+                      namesTemps.clear ();
+                  }
+
+
             }
         }
 

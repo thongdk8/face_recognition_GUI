@@ -31,7 +31,7 @@ LIBS += -L/usr/local/cuda/lib64 -lcublas -lcusolver -lcurand
 SOURCES += enrolface.cpp\
       main.cpp\
         mainwindow.cpp \
-    facerecognizer.cpp \
+    facerecognizer.cpp
 #    dbconector.cpp \
 #    facedatamodel.cpp
  #   enrolface.cpp
@@ -48,6 +48,7 @@ HEADERS  += mainwindow.h \
     hnswlib/space_ip.h \
     hnswlib/space_l2.h \
     hnswlib/visited_list_pool.h \
-    cnndetector.h
+    cnndetector.h \
+    facetracker.h
 
 FORMS    += mainwindow.ui
